@@ -7,15 +7,6 @@
 	$dirAccess = explode('#GallyAllowfrom',file_get_contents($dir));
 
 	$ip = $_SERVER['REMOTE_ADDR'];
-	// check if ip is already in the list
-	// if(strpos($fileAccess[1],$ip) === false) {
-	// 	$allowfrom = "#GallyAllowfrom\n	Allow from $ip";
-	// 	$fileAccess = implode($allowfrom,$fileAccess);
-	// 	$dirAccess = implode($allowfrom,$dirAccess);
-	// 	file_put_contents($file,$fileAccess);
-	// 	file_put_contents($dir,$dirAccess);
-	// }
-	
 	/*
 		# 213.55.240.227
 		RewriteCond %{REMOTE_ADDR} !^213\.55\.240\.227$ 
