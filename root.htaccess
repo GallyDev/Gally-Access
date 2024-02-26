@@ -4,6 +4,6 @@
 	
 	#GallyAllowfrom
 
-	RewriteRule ^(.*)$ /wordpress/gally_access/ [L,R=302]
+	RewriteRule ^(.*)$ /gally_access/ [L,R=302]
 </Files>
 # END GALLY ACCESS
