@@ -1,6 +1,6 @@
 <?php 
 	if( isset($_POST['email']) ) {
-		$dir = array_pop(array_filter(glob('*'), 'is_dir'));;
+		$gdir = array_pop(array_filter(glob('*'), 'is_dir'));;
 		
 		require_once( __DIR__.'/../wp-load.php' );
 		$users = get_users();
@@ -20,7 +20,7 @@
 
 			$to = $email;
 			$subject = "Gally Access ($domain)";
-			$message = "Sie können via folgendem Link den Adminbereich freischalten:\n".get_site_url().'/gally_access/'.$dir;
+			$message = "Sie können via folgendem Link den Adminbereich freischalten:\n".get_site_url().'/gally_access/'.$gdir;
 			$headers = "From: $noreply" . "\r\n" .
 				"Reply-To: $noreply" . "\r\n" .
 				"Content-Type: text/plain; charset=UTF-8" . "\r\n" .
