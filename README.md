@@ -14,4 +14,11 @@
 # Troubleshoot
 - E-Mail does not arrive
 
-  If the Website is not trusted (http, invalid https or testdomain), the email might not arrive because it looks too suspicious to E-Mail-Servers. This means it does not even appear in a spam folder. 
+  If the Website is not trusted (http, invalid https or testdomain), the email might not arrive because it looks too suspicious to E-Mail-Servers. This means it does not even appear in a spam folder.
+
+- Front-End-Login no longer works
+
+  Some Front-End-Login-Methods use wp-login.php and therefore you have to add a # in the root-file to the RewriteRule so the line looks like this:
+  ```
+  #RewriteRule ^(.*)$ /gally_access/ [L,R=302]
+  ```
