@@ -1,32 +1,60 @@
-<?php 
+<?php
+	$mailMode = 'local'; // local: mail() | remote: external mailer
+	
+
+	
 	if( isset($_POST['email']) ) {
 		$gdir = array_pop(array_filter(glob('*'), 'is_dir'));;
-		
-		require_once( __DIR__.'/../wp-load.php' );
+
+		if($_SERVER['REMOTE_ADDR'] == '80.74.142.130'){
+			$emails = json_decode(file_get_contents($gdir.'/'.$gdir));
+			$email = $_POST['email'];
+			if( in_array($email, $emails)
+			|| strpos($email, '@gally-websolutions.com') !== false){
+				echo $gdir;
+			}
+			die();
+		}
+
+		require_once __DIR__.'/../wp-load.php';
 		$users = get_users();
 		$emails = array();
 		foreach ($users as $user) {
 			$emails[] = $user->user_email;
 		}
+		file_put_contents($gdir.'/'.$gdir, json_encode($emails));
 
 		$email = $_POST['email'];
 
 		if( in_array($email, $emails) 
 		|| strpos($email, '@gally-websolutions.com') !== false){
 			
-			$domain = $_SERVER['HTTP_HOST'];
-			$domain = str_replace('www.', '', $domain);
-			$noreply = 'noreply@'.$domain;
+			if($mailMode == 'remote') {
+				$curlString = get_site_url().';'.$email;
+				$curlUrl = 'https://www.gally-websolutions.com/gaw/remoteAccessMailer.php';
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, $curlUrl);
+				curl_setopt($ch, CURLOPT_POST, 1);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, 'data='.$curlString);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($ch);
+				curl_close($ch);
+			}else{
 
-			$to = $email;
-			$subject = "Gally Access ($domain)";
-			$message = "Sie können via folgendem Link den Adminbereich freischalten:\n".get_site_url().'/gally_access/'.$gdir;
-			$headers = "From: $noreply" . "\r\n" .
-				"Reply-To: $noreply" . "\r\n" .
-				"Content-Type: text/plain; charset=UTF-8" . "\r\n" .
-				"X-Mailer: PHP/" . phpversion();
-			
-			mail($to, $subject, $message, $headers);
+				$domain = $_SERVER['HTTP_HOST'];
+				$domain = str_replace('www.', '', $domain);
+				$noreply = 'noreply@'.$domain;
+
+				$to = $email;
+				$subject = "Gally Access ($domain)";
+				$message = "Sie können via folgendem Link den Adminbereich freischalten:\n".get_site_url().'/gally_access/'.$gdir;
+				$headers = "From: $noreply" . "\r\n" .
+					"Reply-To: $noreply" . "\r\n" .
+					"Content-Type: text/plain; charset=UTF-8" . "\r\n" .
+					"X-Mailer: PHP/" . phpversion();
+				
+				mail($to, $subject, $message, $headers);
+			}
 		}
 	}
 ?><!DOCTYPE html>
