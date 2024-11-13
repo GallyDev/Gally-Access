@@ -1,20 +1,14 @@
-# Gally-Access
-2024 Workaround: double security for WP Login
+# Gally-Access Version 1.0.0
+A simple yet powerful way to keep attacks out of the system and customers happy.
 
-# How to use 
-1. Move files into folder _gally_access_ in the root directory of wordpress next to wp-admin
-2. Rename the folder _64randomize_ to some new random string
-3. Open or create a _.htaccess_-file in the root and paste the code of _root.htaccess_
-4. Create or open a _.htaccess_-file in the folder _wp-admin_ and paste the code of _wp-admin.htaccess_
-5. Enjoy being locked out of your WP Admin 
-
-# How to communicate
+# How to install 
+Upload folder to Web-Root, rename it to ```gally_access``` and open URL: website.com/gally_access
 
 
 # Troubleshoot
 - E-Mail does not arrive
 
-  If the Website is not trusted (http, invalid https or testdomain), the email might not arrive because it looks too suspicious to E-Mail-Servers. This means it does not even appear in a spam folder.
+  Set ```$mailMode``` to ```remote``` in ```index.php``` to use the webservice of gally-websolutions.com (less secure).
 
 - Front-End-Login no longer works
 
