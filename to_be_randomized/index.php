@@ -32,7 +32,7 @@
 
 	// Check if admin-ajax is allowed
 	if(strpos($dirAccess[0],'admin-ajax.php') === false) {
-		$allowfromDir = "	# Exclude admin-ajax.php";
+		$allowfromDir = "# Exclude admin-ajax.php";
 		$allowfromDir .= "\n	RewriteCond %{REQUEST_URI} !/admin-ajax\.php$";
 		$allowfromDir .= "\n\n	$allowfrom";
 	}
