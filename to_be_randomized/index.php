@@ -12,7 +12,7 @@
 		RewriteCond %{REMOTE_ADDR} !^213\.55\.240\.227$ 
 	*/
 	$allowfrom = "#GallyAllowfrom";
-	
+
 	if(strpos($fileAccess[1],$ip) === false) {
 		$allowfrom .= "\n\n	# $ip SERVER_ADDR\n";
 		$allowfrom .= '	RewriteCond %{REMOTE_ADDR} !'. str_replace('.','\.',$ip) .'$';
@@ -32,9 +32,9 @@
 
 	// Check if admin-ajax is allowed
 	if(strpos($dirAccess[0],'admin-ajax.php') === false) {
-		$allowfromDir = "\n\n # Exclude admin-ajax.php";
-		$allowfromDir .= "\n\nRewriteCond %{REQUEST_URI} !/admin-ajax\.php$";
-		$allowfromDir .= "\n\n$allowfrom";
+		$allowfromDir = "	# Exclude admin-ajax.php";
+		$allowfromDir .= "\n	RewriteCond %{REQUEST_URI} !/admin-ajax\.php$";
+		$allowfromDir .= "\n\n	$allowfrom";
 	}
 
 	$fileAccess = implode($allowfrom,$fileAccess);
