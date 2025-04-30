@@ -1,4 +1,4 @@
-# Gally-Access - 1.0.5
+# Gally-Access - 1.0.6
 A simple yet powerful way to keep attacks out of the system and customers happy.
 
 # How to install 

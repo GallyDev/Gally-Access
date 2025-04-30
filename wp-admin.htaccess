@@ -1,6 +1,9 @@
 # BEGIN GALLY ACCESS
 	RewriteEngine On
 
+	# Exclude admin-ajax.php from rule
+	RewriteCond %{REQUEST_URI} !/admin-ajax\.php$
+	
 	#GallyAllowfrom
 
 	RewriteRule ^(.*)$ /gally_access/ [L,R=302]

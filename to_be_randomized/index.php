@@ -15,14 +15,6 @@
 		$allowfrom = "#GallyAllowfrom";
 		$allowfrom .= "\n\n	# $ip SERVER_ADDR\n";
 		$allowfrom .= '	RewriteCond %{REMOTE_ADDR} !'. str_replace('.','\.',$ip) .'$';
-
-		$fileAccess = implode($allowfrom,$fileAccess);
-		$dirAccess = implode($allowfrom,$dirAccess);
-		file_put_contents($file,$fileAccess);
-		file_put_contents($dir,$dirAccess);
-
-		$fileAccess = explode('#GallyAllowfrom',file_get_contents($file));
-		$dirAccess = explode('#GallyAllowfrom',file_get_contents($dir));
 	}
 
 	$ip = $_SERVER['REMOTE_ADDR'];
@@ -34,13 +26,21 @@
 		$allowfrom = "#GallyAllowfrom";
 		$allowfrom .= "\n\n	# $ip\n";
 		$allowfrom .= '	RewriteCond %{REMOTE_ADDR} !'. str_replace('.','\.',$ip) .'$';
-
-		$fileAccess = implode($allowfrom,$fileAccess);
-		$dirAccess = implode($allowfrom,$dirAccess);
-		file_put_contents($file,$fileAccess);
-		file_put_contents($dir,$dirAccess);
 	}
 
+	$allowfromDir = $allowfrom;
+
+	// Check if admin-ajax is allowed
+	if(strpos($dirAccess[0],'admin-ajax.php') === false) {
+		$allowfromDir = "\n\n # Exclude admin-ajax.php";
+		$allowfromDir .= "\n\nRewriteCond %{REQUEST_URI} !/admin-ajax\.php$";
+		$allowfromDir .= "\n\n$allowfrom";
+	}
+
+	$fileAccess = implode($allowfrom,$fileAccess);
+	$dirAccess = implode($allowfromDir,$dirAccess);
+	file_put_contents($file,$fileAccess);
+	file_put_contents($dir,$dirAccess);
 
 	
 ?><!DOCTYPE html>
