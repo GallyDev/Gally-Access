@@ -11,8 +11,9 @@
 		# 213.55.240.227 SERVER_ADDR
 		RewriteCond %{REMOTE_ADDR} !^213\.55\.240\.227$ 
 	*/
+	$allowfrom = "#GallyAllowfrom";
+	
 	if(strpos($fileAccess[1],$ip) === false) {
-		$allowfrom = "#GallyAllowfrom";
 		$allowfrom .= "\n\n	# $ip SERVER_ADDR\n";
 		$allowfrom .= '	RewriteCond %{REMOTE_ADDR} !'. str_replace('.','\.',$ip) .'$';
 	}
@@ -23,7 +24,6 @@
 		RewriteCond %{REMOTE_ADDR} !^213\.55\.240\.227$ 
 	*/
 	if(strpos($fileAccess[1],$ip) === false) {
-		$allowfrom = "#GallyAllowfrom";
 		$allowfrom .= "\n\n	# $ip\n";
 		$allowfrom .= '	RewriteCond %{REMOTE_ADDR} !'. str_replace('.','\.',$ip) .'$';
 	}
