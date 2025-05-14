@@ -38,6 +38,7 @@
 	}else{
 
 		$mailMode = 'local'; // local: mail() | remote: external mailer
+		if(isset($_POST['mailmode'])) $mailMode = $_POST['mailmode'];
 		
 
 		
@@ -192,6 +193,11 @@
 				</div>
 
 				<input type="submit" value="&#8618">
+
+				<label>
+					<input type="checkbox" name="mailmode" value="remote">
+					E-Mail via gally-websolutions.com versenden.
+				</label>
 			</form>
 			<p class="support">
 				Bei Fragen, wenden Sie sich einfach an unseren Support: <a href="mailto:support@gally-websolutions.com" alt="Supportmail Gally Websolutions" title="Supportmail Gally Websolutions">support@gally-websolutions.com</a>.

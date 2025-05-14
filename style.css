@@ -1,4 +1,4 @@
-:root{
+:root {
 	font-size: 18px;
 	--gap: clamp(1em, 5vw, 2em);
 
@@ -15,7 +15,7 @@
 
 }
 
-body{
+body {
 	background: var(--background);
 	color: var(--color);
 	font-family: var(--font);
@@ -33,7 +33,7 @@ body{
 	overflow: hidden;
 }
 
-body::after{
+body::after {
 	content: 'LOGIN';
 	position: absolute;
 	top: 50%;
@@ -47,7 +47,7 @@ body::after{
 	z-index: -1;
 }
 
-h1{
+h1 {
 	font-size: 2em;
 	margin: 0;
 	padding: 0;
@@ -56,14 +56,14 @@ h1{
 	line-height: 1;
 }
 
-small{
+small {
 	font-size: .5em;
 	color: var(--accent-B);
 	font-weight: 500;
 	width: 100%;
 
-	a{
-		float:right;
+	a {
+		float: right;
 		text-decoration: none;
 		color: var(--color);
 		background: rgb(0 0 0 / .125);
@@ -71,31 +71,34 @@ small{
 		border-radius: 1em;
 		opacity: .5;
 		transition: opacity .3s;
-		&:hover{
+
+		&:hover {
 			opacity: 1;
 		}
 	}
 }
 
-p{
+p {
 	margin: 0;
 	padding: 0;
 	margin-bottom: var(--gap);
 }
 
-b{
+b {
 	color: var(--accent-B);
 }
 
-a{
+a {
 	color: var(--accent-B);
 	transition: var(--trans-main);
 }
-.modal span{
+
+.modal span {
 	width: 100%;
 }
-span a:last-child{
-	float:right;
+
+span a:last-child {
+	float: right;
 	background: var(--accent-B);
 	color: var(--foreground);
 	padding: 0.5em;
@@ -104,7 +107,7 @@ span a:last-child{
 	text-decoration: none;
 }
 
-.support{
+.support {
 	font-size: .8em;
 	margin-top: var(--gap);
 	margin-bottom: 0;
@@ -112,30 +115,30 @@ span a:last-child{
 	transition: var(--trans-main);
 }
 
-.support:hover{
+.support:hover {
 	opacity: 1;
 }
 
-a:hover{
+a:hover {
 	color: var(--color);
 }
 
-#logo{
+#logo {
 	max-width: 200px;
 	width: 15em;
 	display: block;
 	height: auto;
 }
 
-hr{
+hr {
 	background: black;
-    height: 2px;
-    width: 100%;
-    border: 0;
-    opacity: .025;
+	height: 2px;
+	width: 100%;
+	border: 0;
+	opacity: .025;
 }
 
-.modal{
+.modal {
 	background: var(--foreground);
 	box-shadow: 0 0 50px var(--accent-A);
 	padding: var(--gap);
@@ -149,12 +152,12 @@ hr{
 	max-width: 800px;
 }
 
-.modal input[type="submit"]{
+.modal input[type="submit"] {
 	text-decoration: none;
 	background: var(--accent-B);
 	display: block;
 	padding: 0.5rem;
-	border-radius:0;
+	border-radius: 0;
 	border: none;
 	width: 20%;
 	height: 44px;
@@ -163,16 +166,17 @@ hr{
 	font-size: 1.5em;
 }
 
-.modal input[type="submit"]:hover{
+.modal input[type="submit"]:hover {
 	background: var(--color);
 	cursor: pointer !important;
 }
 
 
-form{
+form {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
+	flex-wrap: wrap;
 }
 
 
@@ -181,9 +185,9 @@ form{
 	width: 80%;
 	height: 44px;
 	line-height: 44px;
-  }
+}
 
-label {
+div>label {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -193,6 +197,7 @@ label {
 	cursor: text;
 	pointer-events: none;
 }
+
 input {
 	width: 100%;
 	border: 0;
@@ -204,17 +209,44 @@ input {
 	font-size: 1em;
 	font-weight: normal;
 }
-  input:invalid {
+
+input:invalid {
 	outline: 0;
-  }
-  input:focus,
-  input:valid {
+}
+
+input:focus,
+input:valid {
 	border-color: var(--accent-B);
 	background-color: var(--foreground);
-  }
-  input:focus~label,
-  input:valid~label {
+}
+
+input:focus~label,
+input:valid~label {
 	font-size: .8em;
 	top: -2.5em;
 	color: var(--accent-B);
-  }
+}
+
+form>label{
+	flex:1;
+	display: flex;
+	place-items: center;
+	padding: .1em 0;
+	gap: .4em;
+
+	input[type="checkbox"] {
+		all: unset;
+		display: block;
+		height: 1em;
+		width: 1em;
+		box-sizing: border-box;
+		background: var(--foreground);
+		box-shadow: 0 0 0 2px var(--foreground) inset;
+		border: 2px solid var(--accent-B);
+		border-radius: 0.3em;
+		
+		&:checked {
+			background: var(--accent-B);
+		}
+	}
+}
